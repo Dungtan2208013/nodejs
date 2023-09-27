@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>add</title>
+</head>
+<body>
+
+<div class="container">
+    <!-- <a href="/">Home</a> | -->
+    <a href="/">All product List</a>
+    <a href="/add">Add New product</a> |
+</div>
+<div style="text-align: center;">
+    <h2>All Users</h2>
+</div>
+
+<div class="container">
+    <table width='100%' border=0>
+
+        <tr style='text-align:left; background-color:#CCC'>
+            <th>ID</th>
+            <th>ProductCode</th>
+            <th>ProductName</th>
+            <th>ProductData</th>
+            <th>ProductOriginPrice</th>
+            <th>Quantity</th>
+            <th>ProductStoreCode</th>
+            <th>Action</th>
+        </tr>
+
+        <% if(data) { %>
+            <% data.sort((a, b) => b.ProductStoreCode.localeCompare(a.ProductStoreCode)).forEach(function(product){ %>
+                <tr>
+                    <td><%= product.id %></td>
+                    <td><%= product.ProductCode %></td>
+                    <td><%= product.ProductName %></td>
+                    <td><%= product.ProductData %></td>
+                    <td><%= product.ProductOriginPrice %></td>
+                    <td><%= product.Quantity %></td>
+                    <td><%= product.ProductStoreCode %></td>
+                    
+                    <td>
+                        <div style="float:left">
+                            <form method="post" action="products/delete/<%= product.id %>" style="float:right">
+                                <input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+                                <input type="hidden" name="_method" value="DELETE" />
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            <% }) %>
+        <% } %>
+
+    </table>
+</div>
+
+
+</body>
